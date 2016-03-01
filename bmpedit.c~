@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 
 /* Usage: bmpedit [OPTIONS...] [input.bmp]
@@ -29,3 +30,6 @@ int main(int argc, char *argv[]) {
 	// continue reading: http://faq.cprogramming.com/cgi-bin/smartfaq.cgi?answer=1048384537&id=1043284392
 
 }
+=======
+// your code
+>>>>>>> 106202d52bbd5733ddc6427f17f80f4f94c8a8e2
