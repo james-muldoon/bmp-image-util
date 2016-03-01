@@ -15,6 +15,9 @@ OPTIONS:
 
 FILE *input_image;
   
+// HEADER PARSER FUNCTION DEFINITION WILL GO HERE
+void HeaderParser(FILE input_image);
+
 
 /* Code for taking arguments from terminal appropriated from these sources:
 http://stackoverflow.com/questions/498320/pass-arguments-into-c-program-from-command-line
@@ -22,6 +25,9 @@ http://stackoverflow.com/questions/17645447/how-to-pass-command-line-arguments-t
 */
 int main(int argc, char *argv[]) {
 	input_image = fopen(argv[1], "r");
+
+  HeaderParser(input_image);
+
 
 	printf("File name %s\n", argv[1]);
 	return 0;
