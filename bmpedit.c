@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
             printf("%f\n", threshold);
             break;
           case 'h':
-            printf("Insert help message here");
+            printf("Insert help message here\n");
             return 0;
       }
       --argc;
