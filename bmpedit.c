@@ -15,20 +15,58 @@ OPTIONS:
   -h           Displays this usage message. */
 
 
-/* Code for taking arguments from terminal appropriated from these sources:
-http://stackoverflow.com/questions/498320/pass-arguments-into-c-program-from-command-line
-http://stackoverflow.com/questions/17645447/how-to-pass-command-line-arguments-to-a-c-program?rq=1
-*/
+// Give default arguments in case the user doesn't specify them
+#define DEF_THRESHOLD 0.5f;
+#define DEF_INPUT_FILE "cup.bmp";
+#define DEF_OUTPUT_FILE "cupth.bmp";
+
+
+
 int main(int argc, char *argv[]) {
   int sz, clrR, clrG, clrB;
   float ratio, threshold; 
   unsigned char *data;
   int i, j;
+  char *output_file;
+  char *input_file;
 
-  threshold = 0.5;
+  // Set variables to defaults
+  output_file = DEF_OUTPUT_FILE;
+  threshold = DEF_THRESHOLD;
+  input_file = DEF_INPUT_FILE;
+
+
+
+  // Read through the command line arguments and set variables accordingly
+  while (argc > 1) {
+    if (argv[1][0] == '-') {
+      switch (argv[1][1]) {
+          case 'o':
+            output_file = argv[2];
+            break;
+          case 't':
+            printf("%s\n", argv[2]);
+            threshold = (float) atof(argv[2]);
+            printf("%f\n", threshold);
+            break;
+          case 'h':
+            printf("Insert help message here");
+            return 0;
+      }
+      --argc;
+      ++argv;
+    } else {
+      // if there is no option selected, program will assume that it is being given 
+      // the name of the input file
+      input_file = argv[1];
+    }
+    --argc;
+    ++argv;
+  }
+
 
   // read the file into memory
-  FILE *input_image = fopen("cup.bmp", "r");
+  FILE *input_image = fopen(input_file, "r");
 
   if (input_image == NULL) {
     printf("Error: problem opening file\n");
@@ -63,12 +101,12 @@ int main(int argc, char *argv[]) {
 
   for (i=0;i<width;i++) {  
        for (j=0;j<height;j++) {
-            clrR = data[offset + i*3 + j*width*3 + 2]; 
+            clrR = data[offset + i*3 + j*width*3 + 2];
             clrG = data[offset + i*3 + j*width*3 + 1]; 
             clrB = data[offset + i*3 + j*width*3 ]; 
 
-            ratio = ((clrR + clrG + clrB) / 3 / 255.0f); 
-            
+            ratio = (float)((clrR + clrG + clrB) / (float)3.0f / (float)255.0f);
+           
             if (ratio < threshold) {
               data[offset + i*3 + j*width*3 + 2] = 0;
               data[offset + i*3 + j*width*3 + 1] = 0;
@@ -81,7 +119,7 @@ int main(int argc, char *argv[]) {
        }
     }
 
-    FILE *fp = fopen("test.bmp", "w+");
+    FILE *fp = fopen(output_file, "w+");
     fwrite(data, 1, sz, fp);
     fclose(fp);
 
