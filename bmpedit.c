@@ -45,9 +45,7 @@ int main(int argc, char *argv[]) {
             output_file = argv[2];
             break;
           case 't':
-            printf("%s\n", argv[2]);
             threshold = (float) atof(argv[2]);
-            printf("%f\n", threshold);
             break;
           case 'h':
             printf("Insert help message here\n");
@@ -92,9 +90,9 @@ int main(int argc, char *argv[]) {
   
   // get information from the bmp header
   int width = data[18] | data[19] << 8 | data[20] << 16 | data[21] << 24;
-  printf("width: %d\n", width);
+  printf("Image width: %d\n", width);
   int height = data[22] | data[23] << 8 | data[24] << 16 | data[25] << 24;
-  printf("height: %d\n", height);
+  printf("Image height: %d\n", height);
 
 
   int offset = data[10] | data[11] << 8 | data[12] << 16 | data[13] << 24;
