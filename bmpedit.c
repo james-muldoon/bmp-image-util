@@ -48,9 +48,9 @@ int main(int argc, char *argv[]) {
             threshold = (float) atof(argv[2]);
             break;
           case 'h':
-            printf("Insert help message here\n");
+            printf("Usage: bmpedit [OPTIONS...] [input.bmp] \n \n DESCRIPTION: This program does simple edits of BMP image files. \n When the program runs it first prints out the width and the height of the input image within the BMP file. \n  Once this is done if there is a filter (or sequence of filters) then they are applied to the image.  \n The resulting image is also stored using BMP format into an output file.  \n Without any filters only the width and height of the image is output. \n \n  OPTIONS: \n -o FILE      Sets the output file for modified images (default output file is \"out.bmp\"). \n -t 0.0-1.0   Apply a threshold filter to the image with a threshold the threshold value given. \n -h           Displays this usage message.\n");
             return 0;
-      }
+      } 
       --argc;
       ++argv;
     } else {

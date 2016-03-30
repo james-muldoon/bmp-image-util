@@ -1,0 +1,75 @@
+[33mcommit 56401e65d26604f8eb708a9b51bb6deb959a2d23[m
+Author: James Muldoon <james.muldoon@outlook.com>
+Date:   Wed Mar 16 21:27:27 2016 +1100
+
+    cleaned up code and README
+
+[33mcommit 30de1053e2ab3016e65d8c90d0f4a4d24582919d[m
+Author: James Muldoon <james.muldoon@outlook.com>
+Date:   Wed Mar 16 21:10:56 2016 +1100
+
+    Committing file deletions
+
+[33mcommit 2e84bf658d2a221f11df32d749187409269bf640[m
+Author: James Muldoon <u5796521@anu.edu.au>
+Date:   Fri Mar 11 13:24:40 2016 +1100
+
+    Mostly finished the README.md file, however will need more work once testing and extensions have been done
+
+[33mcommit 8819474625d2da48cdfc9b67dec72adae060908b[m
+Author: James Muldoon <u5796521@anu.edu.au>
+Date:   Fri Mar 11 12:14:09 2016 +1100
+
+    implemented command line arguments, i.e. program will take a file as argument, output to a specified file, and can be given a specific threshold for the filter
+
+[33mcommit 5e20d211f68f2e8ea5322edb35feae9c0e55f424[m
+Author: James Muldoon <u5796521@anu.edu.au>
+Date:   Tue Mar 8 17:04:18 2016 +1100
+
+    completed threshold filter, now need to generalise code
+
+[33mcommit a59009105e4f6c962e77b2648e153acfd91c7289[m
+Author: James Muldoon <u5796521@anu.edu.au>
+Date:   Mon Mar 7 20:55:57 2016 +1100
+
+    completed part 1 of the assignment
+
+[33mcommit de4400a9f6ce3cba7eeaaf73fbefff2e927ef83c[m
+Author: James Muldoon <u5796521@anu.edu.au>
+Date:   Wed Mar 2 22:35:07 2016 +1100
+
+    Unable to make progress past segmentation error. Created furtherreading.txt to store helpful web links
+
+[33mcommit 3d8c1ff447d22bc6795b3b98cb1c91489427eb57[m
+Author: James Muldoon <u5796521@anu.edu.au>
+Date:   Wed Mar 2 09:48:24 2016 +1100
+
+    added function definition for header parser
+
+[33mcommit 262f1761047adebb87ea4dc2b0b83677c4fbfb53[m
+Merge: 39fa0b7 106202d
+Author: James Muldoon <u5796521@anu.edu.au>
+Date:   Tue Mar 1 17:02:10 2016 +1100
+
+    Merge branch 'master' of gitlab.cecs.anu.edu.au:u5796521/comp2300-2016-assignment1
+    
+    Conflicts:
+    	bmpedit.c
+
+[33mcommit 39fa0b79c4847d7a5053a1aae7fd50531049d3f7[m
+Author: James Muldoon <u5796521@anu.edu.au>
+Date:   Tue Mar 1 16:58:46 2016 +1100
+
+    init
+
+[33mcommit 106202d52bbd5733ddc6427f17f80f4f94c8a8e2[m
+Author: Eric McCreath <ericm@cs.anu.edu.au>
+Date:   Fri Feb 5 14:51:08 2016 +1100
+
+    start
+
+[33mcommit 684f8f8203088bc00f940006a47225b5db534010[m
+Author: Eric McCreath <ericm@cs.anu.edu.au>
+Date:   Fri Feb 5 14:42:32 2016 +1100
+
+    add README
