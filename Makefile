@@ -3,14 +3,14 @@ bmpedit : bmpedit.c
 
 run : 
 	gcc -o bmpedit -std=c11 -Wall bmpedit.c
-	./bmpedit
+	./bmpedit -t 0.5 cup.bmp
 
 clean : 
-	rm cupth.bmp
+	rm out.bmp
 	rm -f bmpedit
 
 view : 
-	feh cupth.bmp
+	feh out.bmp
 
 help : 
 	./bmpedit -h
