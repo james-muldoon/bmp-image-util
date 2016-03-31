@@ -1,61 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-/* Usage: bmpedit [OPTIONS...] [input.bmp]
-
-DESCRIPTION:
-  This program does simple edits of BMP image files. When the program runs it first prints 
-  out the width and the height of the input image within the BMP file.  Once this is done if
-  there is a filter (or sequence of filters) then they are applied to the image.  The resulting image is also
-  stored using BMP format into an output file.  Without any filters only the width and height of the image is output.
-
-OPTIONS:
-  -o FILE      Sets the output file for modified images (default output file is "out.bmp").
-  -t 0.0-1.0   Apply a threshold filter to the image with a threshold the threshold value given.
-  -h           Displays this usage message. */
+#include "filters.h"
 
 
-// Give default arguments in case the user doesn't specify them
-#define DEF_OUTPUT_FILE "out.bmp";
+int parse_args(int argc, char *argv[], float *threshold, int *TF, int *SEPIA, char *output_file, char *input_file) {
 
-void apply_threshold(unsigned char *data, float threshold, int width, int height) {
-  int clrR, clrG, clrB;
-  float ratio;
-  int i, j;
-
-  int offset = data[10] | data[11] << 8 | data[12] << 16 | data[13] << 24;
-
-  for (i=0;i<width;i++) {  
-       for (j=0;j<height;j++) {
-          clrR = data[offset + i*3 + j*width*3 + 2];
-          clrG = data[offset + i*3 + j*width*3 + 1]; 
-          clrB = data[offset + i*3 + j*width*3 ]; 
-
-          ratio = (float)((clrR + clrG + clrB) / (float)3.0f / (float)255.0f);
-         
-          if (ratio < threshold) {
-            data[offset + i*3 + j*width*3 + 2] = 0;
-            data[offset + i*3 + j*width*3 + 1] = 0;
-            data[offset + i*3 + j*width*3    ] = 0;
-          } else {
-            data[offset + i*3 + j*width*3 + 2] = 255;
-            data[offset + i*3 + j*width*3 + 1] = 255;
-            data[offset + i*3 + j*width*3    ] = 255;
-          }
-       }
-    }
+  return 1;
 }
+
 
 int main(int argc, char *argv[]) {
   int sz;
   float threshold;
   unsigned char *data;
-  char *output_file;
+  char *output_file = NULL;
   char *input_file = NULL;
-  int TF = 0;
+  int TF, SEPIA;
 
-  // Set variables to defaults
+    // Set variables to defaults
   output_file = DEF_OUTPUT_FILE;
+  TF = DISABLED;
+  SEPIA = DISABLED;
+
 
   // Read through the command line arguments and set variables accordingly
   while (argc > 1) {
@@ -63,23 +29,28 @@ int main(int argc, char *argv[]) {
       switch (argv[1][1]) {
           case 'o':
             output_file = argv[2];
+            --argc;
+            ++argv; 
             break;
           case 't':
             threshold = (float) atof(argv[2]);
-            TF = 1;
+            TF = ENABLED;
+            --argc;
+            ++argv;
+            break;
+          case 's':
+            SEPIA = ENABLED;
             break;
           case 'h':
             printf("Usage: bmpedit [OPTIONS...] [input.bmp] \n \n DESCRIPTION: This program does simple edits of BMP image files. \n When the program runs it first prints out the width and the height of the input image within the BMP file. \n  Once this is done if there is a filter (or sequence of filters) then they are applied to the image.  \n The resulting image is also stored using BMP format into an output file.  \n Without any filters only the width and height of the image is output. \n \n  OPTIONS: \n -o FILE      Sets the output file for modified images (default output file is \"out.bmp\"). \n -t 0.0-1.0   Apply a threshold filter to the image with a threshold the threshold value given. \n -h           Displays this usage message.\n");
             return 0;
       } 
-      --argc;
-      ++argv;
     } else {
       // if there is no option selected, program will assume that it is being given 
       // the name of the input file
       // check that the user has not given multiple input file names
       if (input_file == NULL) {
-      input_file = argv[1];
+        input_file = argv[1];
       } else {
         printf("Error: more than one input file given\n");
         return 0;
@@ -89,7 +60,6 @@ int main(int argc, char *argv[]) {
     --argc;
     ++argv;
   }
-
 
   // read the file into memory
   FILE *input_image = fopen(input_file, "r");
@@ -122,13 +92,18 @@ int main(int argc, char *argv[]) {
   int height = data[22] | data[23] << 8 | data[24] << 16 | data[25] << 24;
   printf("Image height: %d\n", height);
 
-  if (TF == 1) {
-    apply_threshold(data, threshold, width, height);
+  int offset = data[10] | data[11] << 8 | data[12] << 16 | data[13] << 24;
+
+  if (TF == ENABLED) {
+    apply_threshold(data, threshold, width, height, offset);
+  }
+  if (SEPIA == ENABLED) {
+    apply_sepia(data, width, height, offset);
   }
 
   // write data to the output file
   // only do this if some modification has been made to the image.
-  if (TF == 1) {
+  if ((TF == ENABLED) || (SEPIA == ENABLED)) {
   FILE *fp = fopen(output_file, "w+");
   fwrite(data, 1, sz, fp);
   fclose(fp);
@@ -136,3 +111,4 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
+

@@ -1,8 +1,8 @@
 bmpedit : bmpedit.c
-	gcc -o bmpedit -std=c11 -Wall bmpedit.c
+	gcc -o bmpedit -std=c11 -Wall bmpedit.c filters.c
 
 run : 
-	gcc -o bmpedit -std=c11 -Wall bmpedit.c
+	gcc -o bmpedit -std=c11 -Wall bmpedit.c filters.c
 	./bmpedit cup.bmp
 
 clean : 
