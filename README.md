@@ -41,7 +41,7 @@ Tests were applied to the cup image given in the assignment spec, as well as on 
 		* checked behaviour when the threshold filter is given a value outside of 0-1.0. Execution continues as normal, and image will just turn out all black or white.
 
 * Extensions: 
-	*Implemented another image filter, Sepia. This modifies the RGB values of each pixel according to a specific formula, resulting in an image effect that looks "warmer" than a black-and-white image (i.e. original colours are dulled, but still distinct). 
+	* Implemented another image filter, Sepia. This modifies the RGB values of each pixel according to a specific formula, resulting in an image effect that looks "warmer" than a black-and-white image (i.e. original colours are dulled, but still distinct). 
 
 * Limitations
 	* Only works for one header file type. An improvement over this would be altering the logic of the program according to the type of file it is being given. For example, if the first few bytes of the header indicated it was reading a BMP, read the data in the way it currently is. If the header indicated it was a JPEG, use a method of reading suited to that file format.  
