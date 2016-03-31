@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "filters.h"
 
 
@@ -42,7 +43,7 @@ int main(int argc, char *argv[]) {
             SEPIA = ENABLED;
             break;
           case 'h':
-            printf("Usage: bmpedit [OPTIONS...] [input.bmp] \n \n DESCRIPTION: This program does simple edits of BMP image files. \n When the program runs it first prints out the width and the height of the input image within the BMP file. \n  Once this is done if there is a filter (or sequence of filters) then they are applied to the image.  \n The resulting image is also stored using BMP format into an output file.  \n Without any filters only the width and height of the image is output. \n \n  OPTIONS: \n -o FILE      Sets the output file for modified images (default output file is \"out.bmp\"). \n -t 0.0-1.0   Apply a threshold filter to the image with a threshold the threshold value given. \n -h           Displays this usage message.\n");
+            printf("Usage: bmpedit [OPTIONS...] [input.bmp] \n \n DESCRIPTION: This program does simple edits of BMP image files. \n When the program runs it first prints out the width and the height of the input image within the BMP file. \n  Once this is done if there is a filter (or sequence of filters) then they are applied to the image.  \n The resulting image is also stored using BMP format into an output file.  \n Without any filters only the width and height of the image is output. \n \n  OPTIONS: \n -o FILE      Sets the output file for modified images (default output file is \"out.bmp\"). \n -t 0.0-1.0   Apply a threshold filter to the image with a threshold the threshold value given. \n -s           Applies a sepia filter to the image. \n -h           Displays this usage message.\n");
             return 0;
       } 
     } else {
@@ -99,6 +100,12 @@ int main(int argc, char *argv[]) {
   }
   if (SEPIA == ENABLED) {
     apply_sepia(data, width, height, offset);
+  }
+
+  // check the user is not trying to (or unintentionally) overwrite the original file
+  if (strcmp(input_file, output_file) == 0) {
+    printf("File output name cannot be the same as the input\n");
+    return 0;
   }
 
   // write data to the output file
