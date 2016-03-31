@@ -48,10 +48,10 @@ void apply_threshold(unsigned char *data, float threshold, int width, int height
 
 int main(int argc, char *argv[]) {
   int sz;
-  float threshold; ;;;;
+  float threshold;
   unsigned char *data;
   char *output_file;
-  char *input_file;
+  char *input_file = NULL;
   int TF = 0;
 
   // Set variables to defaults
@@ -77,7 +77,14 @@ int main(int argc, char *argv[]) {
     } else {
       // if there is no option selected, program will assume that it is being given 
       // the name of the input file
+      // check that the user has not given multiple input file names
+      if (input_file == NULL) {
       input_file = argv[1];
+      } else {
+        printf("Error: more than one input file given\n");
+        return 0;
+      }
+
     }
     --argc;
     ++argv;
@@ -120,9 +127,12 @@ int main(int argc, char *argv[]) {
   }
 
   // write data to the output file
+  // only do this if some modification has been made to the image.
+  if (TF == 1) {
   FILE *fp = fopen(output_file, "w+");
   fwrite(data, 1, sz, fp);
   fclose(fp);
+  }
 
   return 0;
 }

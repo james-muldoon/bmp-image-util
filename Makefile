@@ -3,7 +3,7 @@ bmpedit : bmpedit.c
 
 run : 
 	gcc -o bmpedit -std=c11 -Wall bmpedit.c
-	./bmpedit -t 0.5 cup.bmp
+	./bmpedit cup.bmp
 
 clean : 
 	rm out.bmp
