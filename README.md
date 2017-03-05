@@ -12,6 +12,7 @@ Included with the program files is a makefile. This functions of this file inclu
 	* $ make run : compiles the program (same function as $ make), and then runs the program using the default values (i.e. using cup.bmp, not applying any filters) 
 	* $ make view : displays the end product of the program on an image (assuming the image has been saved to the default "out.bmp"). **Note: user will need to have program 'feh' installed for this command to work.
 	* $ make clean : deletes program executable, and "out.bmp" file (if it exists).
+
 Should the user choose to not use the make file, the program can be compiled using:
  	gcc -o bmpedit -std=c11 -Wall bmpedit.c filters.c
 
