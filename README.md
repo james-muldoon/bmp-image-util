@@ -1,4 +1,3 @@
-
 # Assignnment 1 
 
 * Name : James Muldoon - u5796521
@@ -18,7 +17,7 @@ Should the user choose to not use the make file, the program can be compiled usi
 
 FOR WINDOWS: 
 Since Windows uses a different compiler, the included makefile will not work.
-To compile and create the executable, run the command $ cl bmpedit.c. This will create an executable called 'bmpedit.exe'. From here, all operating systems share the same advanced use commands (although user must at ".exe" onto the end of the executable name).
+To compile and create the executable, run the command $ cl bmpedit.c. This will create an executable called 'bmpedit.exe'. From here, all operating systems share the same advanced use commands (although user must add ".exe" onto the end of the executable name).
 
 If the user wishes to run the program using inputs/outputs other than the defaults, they can use these commands: 
 	* -t <threshold> : specify a threshold value between 0.0-1.0 (float). This will tell the program to output a black and white image, according to the given threshold. Default output file name is "out.bmp".
